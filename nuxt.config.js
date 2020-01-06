@@ -60,6 +60,11 @@ module.exports = {
     "/api/": {
       target: "https://newsapi.org/v2/",
       pathRewrite: { "^/api/": "" }
+    },
+    "/register/": {
+      target:
+        "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyC0P_b-AbAP_9ZaFzCgZ8aRF1WE4CRagAQ",
+      pathRewrite: { "^/register/": "" }
     }
   },
   env: {

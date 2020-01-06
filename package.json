@@ -14,5 +14,10 @@
     "nuxt": "^2.0.0",
     "@nuxtjs/axios": "^5.3.6"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "node-sass": "^4.13.0",
+    "nodemon": "^2.0.2",
+    "sass-loader": "^8.0.0",
+    "vue-material": "^1.0.0-beta-11"
+  }
 }

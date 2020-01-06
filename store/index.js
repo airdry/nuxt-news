@@ -1,6 +1,7 @@
 import Vuex from "vuex";
 import md5 from "md5";
 import db from "~/plugins/firestore";
+import { saveUserData, clearUserData } from "~/utils";
 
 const createStore = () => {
   return new Vuex.Store({
@@ -30,7 +31,9 @@ const createStore = () => {
       },
       setCountry(state, country) {
         state.country = country;
-      }
+      },
+      clearToken: state => (state.token = ""),
+      clearUser: state => (state.user = null)
     },
     actions: {
       async loadHeadlines({ commit }, apiUrl) {
@@ -43,24 +46,44 @@ const createStore = () => {
         try {
           commit("setLoading", true);
           const authUserData = await this.$axios.$post(
-            "/register/",
-            userPayload
+            `/${userPayload.action}/`,
+            {
+              email: userPayload.email,
+              password: userPayload.password,
+              returnSecureToken: userPayload.returnSecureToken
+            }
           );
-          const avatar = `http://gravatar.com/avatar/${md5(
-            authUserData.email
-          )}?d=identicon`;
-          const user = { email: authUserData.email, avatar };
-          await db
-            .collection("users")
-            .doc(userPayload.email)
-            .set(user);
+          let user;
+          if (userPayload.action === "register") {
+            const avatar = `http://gravatar.com/avatar/${md5(
+              authUserData.email
+            )}?d=identicon`;
+            user = { email: authUserData.email, avatar };
+            await db
+              .collection("users")
+              .doc(userPayload.email)
+              .set(user);
+          } else {
+            const loginRef = db.collection("users").doc(userPayload.email);
+            const loggedInUser = await loginRef.get();
+            user = loggedInUser.data();
+          }
           commit("setUser", user);
           commit("setToken", authUserData.idToken);
           commit("setLoading", false);
+          saveUserData(authUserData, user);
         } catch (err) {
           console.error(err);
           commit("setLoading", false);
         }
+      },
+      setLogoutTimer({ dispatch }, interval) {
+        setTimeout(() => dispatch("logoutUser"), interval);
+      },
+      logoutUser({ commit }) {
+        commit("clearToken");
+        commit("clearUser");
+        clearUserData();
       }
     },
     getters: {

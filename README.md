@@ -1,10 +1,10 @@
 # nuxt-app
 
-> My classy Nuxt.js project
+> Nuxt news app
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm run install
 

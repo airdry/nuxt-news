@@ -26,7 +26,7 @@ module.exports = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: "#9ccc65", height: "10px" },
+  loading: { color: "#9ccc65" },
 
   /*
    ** Global CSS
@@ -39,20 +39,31 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: "~/plugins/vue-material" }],
+  plugins: [{ src: "~/plugins/vue-material" }, { src: "~/plugins/axios" }],
 
   /*
    ** Nuxt.js modules
    */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    "@nuxtjs/axios"
+    "@nuxtjs/axios",
+    "@nuxtjs/proxy"
   ],
   /*
    ** Axios module configuration
    */
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
+    credentials: true,
+    proxy: true
+  },
+  proxy: {
+    "/api/": {
+      target: "https://newsapi.org/v2/",
+      pathRewrite: { "^/api/": "" }
+    }
+  },
+  env: {
+    NEWS_API_KEY: "e4b2896f6cbd418cb3271aa607c27b20"
   },
 
   /*

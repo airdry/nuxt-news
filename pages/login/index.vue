@@ -49,7 +49,9 @@
         </md-card-content>
 
         <md-card-actions>
-          <md-button to="/register">Go to Register</md-button>
+          <md-button @click="$router.push('/register')"
+            >Go to Register</md-button
+          >
           <md-button
             class="md-primary md-raised"
             type="submit"
@@ -59,10 +61,18 @@
         </md-card-actions>
       </form>
 
-      <md-snackbar :md-active.sync="isAuthenticated">
-        {{ form.email }} was successfully logged in!
-      </md-snackbar>
+      <md-snackbar :md-active.sync="isAuthenticated"
+        >{{ form.email }} was successfully logged in!</md-snackbar
+      >
     </md-card>
+
+    <!-- Back Button -->
+    <md-button
+      class="md-fixed md-fab-bottom-right md-fab md-primary"
+      @click="$router.go(-1)"
+    >
+      <md-icon>arrow_back</md-icon>
+    </md-button>
   </div>
 </template>
 

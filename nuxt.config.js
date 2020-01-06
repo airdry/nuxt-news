@@ -35,7 +35,7 @@ module.exports = {
    */
   css: [
     { src: "vue-material/dist/vue-material.min.css", lang: "css" },
-    { src: "~/assets/theme.scss", lang: "scss" }
+    { src: "./assets/theme.scss", lang: "scss" }
   ],
 
   /*
@@ -44,7 +44,8 @@ module.exports = {
   plugins: [
     { src: "~/plugins/vue-material" },
     { src: "~/plugins/axios" },
-    { src: "~/plugins/firestore" }
+    { src: "~/plugins/firestore" },
+    { src: "~/plugins/time-filters" }
   ],
 
   /*

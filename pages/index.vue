@@ -5,22 +5,22 @@
       <md-button @click="showLeftSidepanel = true" class="md-icon-button">
         <md-icon>menu</md-icon>
       </md-button>
-      <nuxt-link class="md-primary md-title" to="/">
-        NuxtNews
-      </nuxt-link>
+      <nuxt-link class="md-primary md-title" to="/">NuxtNews</nuxt-link>
 
       <div class="md-toolbar-section-end">
         <template v-if="isAuthenticated">
           <md-button>
-            <md-avatar><img :src="user.avatar" :alt="user.email"/></md-avatar>
+            <md-avatar>
+              <img :src="user.avatar" :alt="user.email" />
+            </md-avatar>
             {{ user.email }}
           </md-button>
           <md-button @click="logoutUser">Logout</md-button>
         </template>
 
         <template v-else>
-          <md-button to="/login">Login</md-button>
-          <md-button to="/register">Register</md-button>
+          <md-button @click="$router.push('/login')">Login</md-button>
+          <md-button @click="$router.push('/register')">Register</md-button>
         </template>
         <md-button class="md-primary" @click="showSearchDialog = true"
           >Search</md-button
@@ -31,7 +31,7 @@
       </div>
     </md-toolbar>
 
-    <!-- Search Dialog -->
+    <!-- Search Dialog-->
     <md-dialog :md-active.sync="showSearchDialog">
       <md-dialog-title>Search Headlines</md-dialog-title>
 
@@ -44,12 +44,12 @@
             maxlength="30"
           ></md-input>
         </md-field>
-        <md-datepicker v-model="fromDate" md-immediately
-          ><label>Select starting date (optional)</label></md-datepicker
-        >
-        <md-datepicker v-model="toDate" md-immediately
-          ><label>Select ending date (optional)</label></md-datepicker
-        >
+        <md-datepicker v-model="fromDate" md-immediately>
+          <label>Select starting date (optional)</label>
+        </md-datepicker>
+        <md-datepicker v-model="toDate" md-immediately>
+          <label>Select ending date (optional)</label>
+        </md-datepicker>
         <md-field>
           <label for="sortBy">Sort search results by criteria (optional)</label>
           <md-select v-model="sortBy" name="sortBy" id="sortBy" md-dense>
@@ -70,7 +70,7 @@
       </md-dialog-actions>
     </md-dialog>
 
-    <!-- Personal News Feed (Left Drawer) -->
+    <!-- Personal News Feed (Left Drawer)-->
     <md-drawer md-fixed :md-active.sync="showLeftSidepanel">
       <md-toolbar md-elevation="1">
         <span class="md-title">Personal Feed</span>
@@ -101,7 +101,7 @@
         md-label="Nothing in Feed"
         md-description="Login to bookmark headlines"
       >
-        <md-button to="/login" class="md-primary md-raised">Login</md-button>
+        <md-button class="md-primary md-raised">Login</md-button>
       </md-empty-state>
 
       <md-empty-state
@@ -120,18 +120,16 @@
         :key="i"
       >
         <md-list-item>
-          <md-avatar
-            ><img :src="headline.urlToImage" :alt="headline.title"
-          /></md-avatar>
+          <md-avatar>
+            <img :src="headline.urlToImage" :alt="headline.title" />
+          </md-avatar>
 
           <div class="md-list-item-text">
-            <span
-              ><a :href="headline.url" target="_blank">{{
-                headline.title
-              }}</a></span
-            >
+            <span>
+              <a :href="headline.url" target="_blank">{{ headline.title }}</a>
+            </span>
             <span>{{ headline.source.name }}</span>
-            <span>View Comments</span>
+            <span @click="saveHeadline(headline)">View Comments</span>
           </div>
 
           <md-button
@@ -167,9 +165,8 @@
           >
           <span class="md-list-item-text">{{ newsCategory.name }}</span>
         </md-list-item>
-      </md-list>
-    </md-drawer>
-
+      </md-list> </md-drawer
+    >-->
     <!-- App Content -->
     <div class="md-layout-item md-size-95">
       <md-content

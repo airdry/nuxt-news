@@ -50,7 +50,7 @@
           /></md-avatar>
           <div class="md-list-item-text">
             <span>{{ comment.user.username }}</span>
-            <span>{{ comment.publishedAt }}</span>
+            <span>{{ comment.publishedAt | commentTimeToNow }}</span>
             <p>{{ comment.text }}</p>
           </div>
 

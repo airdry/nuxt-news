@@ -202,7 +202,7 @@
                   <md-icon class="small-icon">face</md-icon>
                 </div>
                 <div class="md-subhead">
-                  {{ headline.publishedAt }}
+                  {{ headline.publishedAt | publishedTimeToNow }}
                   <md-icon class="small-icon">alarm</md-icon>
                 </div>
               </md-card-header>

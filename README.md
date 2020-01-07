@@ -1,4 +1,4 @@
-# nuxt-app
+<h1 align="center">Welcome to News app 👋</h1>
 
 > Nuxt news app
 

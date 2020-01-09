@@ -45,7 +45,8 @@ module.exports = {
     { src: "~/plugins/vue-material" },
     { src: "~/plugins/axios" },
     { src: "~/plugins/firestore" },
-    { src: "~/plugins/time-filters" }
+    { src: "~/plugins/time-filters" },
+    { src: "~/plugins/lazysizes.client.js" }
   ],
 
   /*
@@ -54,11 +55,17 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     "@nuxtjs/axios",
-    "@nuxtjs/proxy"
+    "@nuxtjs/proxy",
+    "@bazzite/nuxt-optimized-images"
   ],
-  /*
-   ** Axios module configuration
-   */
+  optimizedImages: {
+    optimizeImages: true
+  },
+
+  optimizeImagesInDev: {
+    optimizeImages: true
+  },
+
   axios: {
     credentials: true,
     proxy: true
@@ -87,9 +94,11 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config, ctx) {}
+    extend(config, { isDev, isClient, loaders: { vue } }) {
+      if (isClient) {
+        vue.transformAssetUrls.img = ["data-src", "src"];
+        vue.transformAssetUrls.source = ["data-srcset", "srcset"];
+      }
+    }
   }
 };

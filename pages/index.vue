@@ -1,11 +1,10 @@
 <template>
   <div class="md-layout md-alignment-center" style="margin: 4em 0">
-    <!-- Top Navigation -->
     <md-toolbar class="fixed-toolbar" elevation="1">
       <md-button @click="showLeftSidepanel = true" class="md-icon-button">
         <md-icon>menu</md-icon>
       </md-button>
-      <nuxt-link class="md-primary md-title" to="/">NuxtNews</nuxt-link>
+      <nuxt-link class="md-primary md-title" to="/">News</nuxt-link>
 
       <div class="md-toolbar-section-end">
         <template v-if="isAuthenticated">
@@ -31,7 +30,6 @@
       </div>
     </md-toolbar>
 
-    <!-- Search Dialog-->
     <md-dialog :md-active.sync="showSearchDialog">
       <md-dialog-title>Search Headlines</md-dialog-title>
 
@@ -70,7 +68,6 @@
       </md-dialog-actions>
     </md-dialog>
 
-    <!-- Personal News Feed (Left Drawer)-->
     <md-drawer md-fixed :md-active.sync="showLeftSidepanel">
       <md-toolbar md-elevation="1">
         <span class="md-title">Personal Feed</span>
@@ -93,7 +90,6 @@
         </md-select>
       </md-field>
 
-      <!-- Default Markup (if Feed Empty) -->
       <md-empty-state
         class="md-primary"
         v-if="feed.length === 0 && !user"
@@ -101,7 +97,9 @@
         md-label="Nothing in Feed"
         md-description="Login to bookmark headlines"
       >
-        <md-button class="md-primary md-raised">Login</md-button>
+        <md-button class="md-primary md-raised" @click="$router.push('/login')"
+          >Login</md-button
+        >
       </md-empty-state>
 
       <md-empty-state
@@ -112,7 +110,6 @@
         md-description="Anything you bookmark will be safely stored here"
       ></md-empty-state>
 
-      <!-- Feed Content (if Feed Not Empty) -->
       <md-list
         class="md-triple-line"
         v-else
@@ -143,7 +140,6 @@
       </md-list>
     </md-drawer>
 
-    <!-- News Categories (Right Drawer) -->
     <md-drawer class="md-right" md-fixed :md-active.sync="showRightSidepanel">
       <md-toolbar :md-elevation="1">
         <span class="md-title">News Categories</span>
@@ -165,9 +161,8 @@
           >
           <span class="md-list-item-text">{{ newsCategory.name }}</span>
         </md-list-item>
-      </md-list> </md-drawer
-    >-->
-    <!-- App Content -->
+      </md-list>
+    </md-drawer>
     <div class="md-layout-item md-size-95">
       <md-content
         class="md-layout md-gutter"
@@ -180,7 +175,7 @@
         >
           <md-card style="margin-top: 1em;" md-with-hover>
             <md-ripple>
-              <md-card-media md-ratio="16:9">
+              <md-card-media md-ratio="16:9" class="lazyload">
                 <img :src="headline.urlToImage" :alt="headline.title" />
               </md-card-media>
 

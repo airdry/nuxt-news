@@ -5,7 +5,6 @@
         <div class="md-title">Login</div>
       </md-card-header>
 
-      <!-- Login Form -->
       <form @submit.prevent="validateForm">
         <md-card-content>
           <md-field md-clearable :class="getValidationClass('email')">
@@ -66,7 +65,6 @@
       >
     </md-card>
 
-    <!-- Back Button -->
     <md-button
       class="md-fixed md-fab-bottom-right md-fab md-primary"
       @click="$router.go(-1)"

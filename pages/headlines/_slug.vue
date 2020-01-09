@@ -1,7 +1,6 @@
 <template>
   <div class="md-layout md-alignment-center" style="margin: 5em 0">
     <div class="md-layout-item md-size-75 md-small-size-80 md-xsmall-size-100">
-      <!-- Headline Markup -->
       <md-card>
         <md-card-media style="height: 300px" md-ratio="16:9">
           <img :src="headline.urlToImage" :alt="headline.title" />
@@ -24,7 +23,6 @@
         <md-card-content>{{ headline.content }}</md-card-content>
       </md-card>
 
-      <!-- Comment Form -->
       <form @submit.prevent="sendComment">
         <md-field>
           <label>Enter your comment</label>
@@ -42,7 +40,6 @@
         >
       </form>
 
-      <!-- Comments -->
       <md-list class="md-triple-line" style="margin-top: 1em">
         <md-list-item v-for="comment in headline.comments" :key="comment.id">
           <md-avatar
@@ -69,7 +66,6 @@
         </md-list-item>
       </md-list>
 
-      <!-- Back Button -->
       <md-button
         class="md-fixed md-fab-bottom-right md-fab md-primary"
         @click="$router.go(-1)"
